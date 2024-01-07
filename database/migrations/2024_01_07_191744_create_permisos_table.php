@@ -70,6 +70,36 @@ return new class extends Migration
                     'codigo' => 'LEmpleado',
                     'activo' => true
                 ],
+                [//10
+                    'nombre' => 'Empleado',
+                    'codigo' => 'Empleado',
+                    'activo' => true
+                ],
+                [//11
+                    'nombre' => 'Almacenero',
+                    'codigo' => 'Almacenero',
+                    'activo' => true
+                ],
+                [//12
+                    'nombre' => 'Cajero',
+                    'codigo' => 'Cajero',
+                    'activo' => true
+                ],
+                [//13
+                    'nombre' => 'Administración de Proveedores',
+                    'codigo' => 'LProveedor',
+                    'activo' => true
+                ],
+                [//14
+                    'nombre' => 'Gestion de Productos',
+                    'codigo' => 'AProductos',
+                    'activo' => true
+                ],
+                [//15
+                    'nombre' => 'Gestion de Productos de Almacen',
+                    'codigo' => 'AAlmacen',
+                    'activo' => true
+                ],
             ]
         );
     }

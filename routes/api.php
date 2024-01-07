@@ -16,6 +16,11 @@ use App\Http\Controllers\Logistica\SucursalController;
 use App\Http\Controllers\Logistica\AlmacenController;
 use App\Http\Controllers\Logistica\CajaController;
 use App\Http\Controllers\Logistica\TipoPagoController;
+use App\Http\Controllers\Logistica\EmpleadoController;
+use App\Http\Controllers\Logistica\ProveedorController;
+
+use App\Http\Controllers\Almacen\ProductoController;
+use App\Http\Controllers\Almacen\ProductoAlmacenController;
 
 
 Route::group([
@@ -96,8 +101,8 @@ Route::prefix('tipo-pago')->middleware(['permisso:LTPago'])->group(function () {
     Route::delete('{id}',                               [TipoPagoController::class, 'destroy']);
 
     Route::get('suc/{id}',                              [TipoPagoController::class, 'showSucursales']);
-    Route::get('addSucursal/{suc}/{tipo}',              [TipoPagoController::class, 'addSucursal']);
-    Route::get('dltSucursal/{suc}/{tipo}',              [TipoPagoController::class, 'deleteSucursal']);
+    Route::get('addSucursal/{tipo}/{suc}',              [TipoPagoController::class, 'addSucursal']);
+    Route::get('dltSucursal/{tipo}/{suc}',              [TipoPagoController::class, 'deleteSucursal']);
 });
 
 Route::prefix('caja')->middleware(['permisso:LCaja'])->group(function () {
@@ -107,4 +112,42 @@ Route::prefix('caja')->middleware(['permisso:LCaja'])->group(function () {
     Route::post('',                                     [CajaController::class, 'create']);
     Route::put('{id}',                                  [CajaController::class, 'update']);
     Route::delete('{id}',                               [CajaController::class, 'destroy']);
+});
+
+Route::prefix('empleado')->middleware(['permisso:LEmpleado'])->group(function () {
+    Route::get('sucursales/all',                        [EmpleadoController::class, 'sucursales']);
+    Route::get('usuarios/all',                          [EmpleadoController::class, 'usuarios']);
+    Route::get('almacenes/{id}',                        [EmpleadoController::class, 'almacenes']);
+    Route::get('cajas/{id}',                            [EmpleadoController::class, 'cajas']);
+    Route::get('',                                      [EmpleadoController::class, 'index']);
+    Route::get('{id}',                                  [EmpleadoController::class, 'show']);
+    Route::post('',                                     [EmpleadoController::class, 'create']);
+    Route::put('{id}',                                  [EmpleadoController::class, 'update']);
+    Route::delete('{id}',                               [EmpleadoController::class, 'destroy']);
+});
+
+Route::prefix('proveedor')->middleware(['permisso:LProveedor'])->group(function () {
+    Route::get('',                                      [ProveedorController::class, 'index']);
+    Route::get('{id}',                                  [ProveedorController::class, 'show']);
+    Route::post('',                                     [ProveedorController::class, 'create']);
+    Route::put('{id}',                                  [ProveedorController::class, 'update']);
+    Route::delete('{id}',                               [ProveedorController::class, 'destroy']);
+});
+
+Route::prefix('producto')->middleware(['permisso:AProductos'])->group(function () {
+    Route::get('',                                      [ProductoController::class, 'index']);
+    Route::get('{id}',                                  [ProductoController::class, 'show']);
+    Route::post('',                                     [ProductoController::class, 'create']);
+    Route::put('{id}',                                  [ProductoController::class, 'update']);
+    Route::delete('{id}',                               [ProductoController::class, 'destroy']);
+});
+
+Route::prefix('gestion-almacen')->middleware(['permisso:AAlmacen'])->group(function () {
+    Route::get('almacenes',                             [ProductoAlmacenController::class, 'almacenes']);
+    Route::get('{id}',                                  [ProductoAlmacenController::class, 'index']);
+    Route::get('get/{id}',                              [ProductoAlmacenController::class, 'show']);
+    Route::get('productos/{id}',                        [ProductoAlmacenController::class, 'showProductos']);
+    Route::post('',                                     [ProductoAlmacenController::class, 'create']);
+    Route::put('{id}',                                  [ProductoController::class, 'update']);
+    Route::delete('{id}',                               [ProductoAlmacenController::class, 'destroy']);
 });

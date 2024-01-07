@@ -41,6 +41,46 @@ return new class extends Migration
                     'link_id' => 4,
                     'permiso_id' => 3,
                 ],
+                [
+                    'link_id' => 6,
+                    'permiso_id' => 4,
+                ],
+                [
+                    'link_id' => 7,
+                    'permiso_id' => 5,
+                ],
+                [
+                    'link_id' => 8,
+                    'permiso_id' => 6,
+                ],
+                [
+                    'link_id' => 9,
+                    'permiso_id' => 7,
+                ],
+                [
+                    'link_id' => 10,
+                    'permiso_id' => 8,
+                ],
+                [
+                    'link_id' => 11,
+                    'permiso_id' => 9,
+                ],
+                [
+                    'link_id' => 12,
+                    'permiso_id' => 13,
+                ],
+                [
+                    'link_id' => 16,
+                    'permiso_id' => 11,
+                ],
+                [
+                    'link_id' => 14,
+                    'permiso_id' => 14,
+                ],
+                [
+                    'link_id' => 15,
+                    'permiso_id' => 15,
+                ],
             ]
         );
     }

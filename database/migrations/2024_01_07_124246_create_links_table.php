@@ -123,6 +123,47 @@ return new class extends Migration
                     'orden'     => '6',
                     'padre_id'  => 5,
                 ],
+                [ //12
+                    'nombre'    => 'Proveedor',
+                    'link'      => '/proveedor',
+                    'icon'      => 'shield-outline',
+                    'visible'   => true,
+                    'orden'     => '7',
+                    'padre_id'  => 5,
+                ],
+                // Almacen
+                [ //13
+                    'nombre'    => 'Almacen',
+                    'link'      => '/almacen',
+                    'icon'      => 'settings',
+                    'visible'   => true,
+                    'orden'     => '3',
+                    'padre_id'  => null,
+                ],
+                [ //14
+                    'nombre'    => 'Gestion de Productos',
+                    'link'      => '/productos',
+                    'icon'      => 'shield',
+                    'visible'   => true,
+                    'orden'     => '1',
+                    'padre_id'  => 13,
+                ],
+                [ //15
+                    'nombre'    => 'Gestion de Productos de Almacen',
+                    'link'      => '/almacen-productos',
+                    'icon'      => 'shield',
+                    'visible'   => true,
+                    'orden'     => '2',
+                    'padre_id'  => 13,
+                ],
+                [ //16
+                    'nombre'    => 'Entrada de Almacen',
+                    'link'      => '/entrada-productos',
+                    'icon'      => 'shield',
+                    'visible'   => true,
+                    'orden'     => '3',
+                    'padre_id'  => 13,
+                ],
             ]
         );
     }
