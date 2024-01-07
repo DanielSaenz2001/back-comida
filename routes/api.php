@@ -11,6 +11,13 @@ use App\Http\Controllers\Seguridad\UserController;
 use App\Http\Controllers\Seguridad\LinkController;
 use App\Http\Controllers\Seguridad\PermisoController;
 
+use App\Http\Controllers\Logistica\EstablecimientoController;
+use App\Http\Controllers\Logistica\SucursalController;
+use App\Http\Controllers\Logistica\AlmacenController;
+use App\Http\Controllers\Logistica\CajaController;
+use App\Http\Controllers\Logistica\TipoPagoController;
+
+
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
@@ -52,4 +59,52 @@ Route::prefix('permiso')->middleware(['permisso:SPermisos'])->group(function () 
     Route::post('',                                     [PermisoController::class, 'create']);
     Route::put('{id}',                                  [PermisoController::class, 'update']);
     Route::delete('{id}',                               [PermisoController::class, 'destroy']);
+});
+
+Route::prefix('establecimiento')->middleware(['permisso:LEstablcimiento'])->group(function () {
+    Route::get('',                                      [EstablecimientoController::class, 'index']);
+    Route::get('{id}',                                  [EstablecimientoController::class, 'show']);
+    Route::post('',                                     [EstablecimientoController::class, 'create']);
+    Route::put('{id}',                                  [EstablecimientoController::class, 'update']);
+    Route::delete('{id}',                               [EstablecimientoController::class, 'destroy']);
+});
+
+Route::prefix('sucursal')->middleware(['permisso:LSucursal'])->group(function () {
+    Route::get('establecimientos/all',                  [SucursalController::class, 'establecimientos']);
+    Route::get('',                                      [SucursalController::class, 'index']);
+    Route::get('{id}',                                  [SucursalController::class, 'show']);
+    Route::post('',                                     [SucursalController::class, 'create']);
+    Route::put('{id}',                                  [SucursalController::class, 'update']);
+    Route::delete('{id}',                               [SucursalController::class, 'destroy']);
+});
+
+Route::prefix('almacen')->middleware(['permisso:LAlmacen'])->group(function () {
+    Route::get('sucursales/all',                        [AlmacenController::class, 'sucursales']);
+    Route::get('',                                      [AlmacenController::class, 'index']);
+    Route::get('{id}',                                  [AlmacenController::class, 'show']);
+    Route::post('',                                     [AlmacenController::class, 'create']);
+    Route::put('{id}',                                  [AlmacenController::class, 'update']);
+    Route::delete('{id}',                               [AlmacenController::class, 'destroy']);
+});
+
+Route::prefix('tipo-pago')->middleware(['permisso:LTPago'])->group(function () {
+    Route::get('sucursales/all',                        [TipoPagoController::class, 'sucursales']);
+    Route::get('',                                      [TipoPagoController::class, 'index']);
+    Route::get('{id}',                                  [TipoPagoController::class, 'show']);
+    Route::post('',                                     [TipoPagoController::class, 'create']);
+    Route::put('{id}',                                  [TipoPagoController::class, 'update']);
+    Route::delete('{id}',                               [TipoPagoController::class, 'destroy']);
+
+    Route::get('suc/{id}',                              [TipoPagoController::class, 'showSucursales']);
+    Route::get('addSucursal/{suc}/{tipo}',              [TipoPagoController::class, 'addSucursal']);
+    Route::get('dltSucursal/{suc}/{tipo}',              [TipoPagoController::class, 'deleteSucursal']);
+});
+
+Route::prefix('caja')->middleware(['permisso:LCaja'])->group(function () {
+    Route::get('sucursales/all',                        [CajaController::class, 'sucursales']);
+    Route::get('',                                      [CajaController::class, 'index']);
+    Route::get('{id}',                                  [CajaController::class, 'show']);
+    Route::post('',                                     [CajaController::class, 'create']);
+    Route::put('{id}',                                  [CajaController::class, 'update']);
+    Route::delete('{id}',                               [CajaController::class, 'destroy']);
 });

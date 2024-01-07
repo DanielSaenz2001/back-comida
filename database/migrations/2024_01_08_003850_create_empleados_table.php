@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('caja_id')->nulleable();
             $table->unsignedInteger('almacen_id')->nulleable();
+            $table->tinyInteger('tipo');
             $table->tinyInteger('estado');
 
             $table->foreign('sucursal_id')->references('id')->on('sucursales');
