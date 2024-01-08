@@ -85,6 +85,14 @@ class EmpleadoController extends Controller
             $puser->save();
         }
 
+        if ($request->isMoso) {
+            $permiso = Permiso::where('codigo', 'Mozo')->first();
+            $puser  = new PermisoUser();
+            $puser->permiso_id  = $permiso->id;
+            $puser->user_id     = $request->user_id;
+            $puser->save();
+        }
+
         return response()->json($data, 200);
     }
 
@@ -109,6 +117,21 @@ class EmpleadoController extends Controller
         if ($data->isAlmacen != $request->isAlmacen) {
             $permiso = Permiso::where('codigo', 'Almacenero')->first();
             if ($request->isAlmacen) {
+                $puser  = new PermisoUser();
+                $puser->permiso_id  = $permiso->id;
+                $puser->user_id     = $request->user_id;
+                $puser->save();
+            } else {
+                $puser  = PermisoUser::where('user_id', $request->user_id)->where('permiso_id', $permiso->id)->first();
+                if ($puser) {
+                    $puser->delete();
+                }
+            }
+        }
+
+        if ($data->isMoso != $request->isMoso) {
+            $permiso = Permiso::where('codigo', 'Mozo')->first();
+            if ($request->isMoso) {
                 $puser  = new PermisoUser();
                 $puser->permiso_id  = $permiso->id;
                 $puser->user_id     = $request->user_id;

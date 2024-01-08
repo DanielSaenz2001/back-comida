@@ -71,8 +71,8 @@ return new class extends Migration
                     'activo' => true
                 ],
                 [//10
-                    'nombre' => 'Empleado',
-                    'codigo' => 'Empleado',
+                    'nombre' => 'Mozo',
+                    'codigo' => 'Mozo',
                     'activo' => true
                 ],
                 [//11

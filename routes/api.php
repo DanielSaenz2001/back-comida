@@ -21,6 +21,8 @@ use App\Http\Controllers\Logistica\ProveedorController;
 
 use App\Http\Controllers\Almacen\ProductoController;
 use App\Http\Controllers\Almacen\ProductoAlmacenController;
+use App\Http\Controllers\Almacen\CompraController;
+use App\Http\Controllers\Almacen\CompraDetalleController;
 
 
 Route::group([
@@ -143,11 +145,31 @@ Route::prefix('producto')->middleware(['permisso:AProductos'])->group(function (
 });
 
 Route::prefix('gestion-almacen')->middleware(['permisso:AAlmacen'])->group(function () {
-    Route::get('almacenes',                             [ProductoAlmacenController::class, 'almacenes']);
+    Route::get('almacenes/all',                         [ProductoAlmacenController::class, 'almacenes']);
     Route::get('{id}',                                  [ProductoAlmacenController::class, 'index']);
     Route::get('get/{id}',                              [ProductoAlmacenController::class, 'show']);
     Route::get('productos/{id}',                        [ProductoAlmacenController::class, 'showProductos']);
     Route::post('',                                     [ProductoAlmacenController::class, 'create']);
-    Route::put('{id}',                                  [ProductoController::class, 'update']);
+    Route::put('{id}',                                  [ProductoAlmacenController::class, 'update']);
     Route::delete('{id}',                               [ProductoAlmacenController::class, 'destroy']);
 });
+
+Route::prefix('compra')->middleware(['permisso:Almacenero'])->group(function () {
+    Route::get('almacenes/all',                         [CompraController::class, 'almacenes']);
+    Route::get('proveedores/all',                       [CompraController::class, 'proveedores']);
+    Route::get('',                                      [CompraController::class, 'index']);
+    Route::get('close/{id}',                            [CompraController::class, 'close']);
+    Route::post('',                                     [CompraController::class, 'create']);
+    Route::put('{id}',                                  [CompraController::class, 'update']);
+    Route::delete('{id}',                               [CompraController::class, 'destroy']);
+});
+
+Route::prefix('compra-detalle')->middleware(['permisso:Almacenero'])->group(function () {
+    Route::get('productos/{id}',                        [CompraDetalleController::class, 'productos']);
+    Route::get('{id}',                                  [CompraDetalleController::class, 'index']);
+    Route::get('get/{id}',                              [CompraDetalleController::class, 'show']);
+    Route::post('',                                     [CompraDetalleController::class, 'create']);
+    Route::put('{id}',                                  [CompraDetalleController::class, 'update']);
+    Route::delete('{id}',                               [CompraDetalleController::class, 'destroy']);
+});
+
